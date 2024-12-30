@@ -5,6 +5,8 @@ const bodyParser = require('body-parser');
 const connection = require('./db/db');
 const categoriesController = require('./categories/CategoriesController');
 const articlesController = require('./articles/ArticlesController');
+const Article = require('./articles/Article');
+const Category = require('./categories/category');
 
 app.use((err, req, res, next) => {
     console.error(err.stack);

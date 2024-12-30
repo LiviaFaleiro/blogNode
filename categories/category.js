@@ -10,4 +10,6 @@ const Category = connection.define('categories', {
         allowNull: false
     }
 });
-model.exports = Category;
+
+
+module.exports = Category;
