@@ -3,6 +3,8 @@ const app = express();
 const sequelize = require('sequelize');
 const bodyParser = require('body-parser');
 const connection = require('./db/db');
+const categoriesController = require('./categories/CategoriesController');
+const articlesController = require('./articles/ArticlesController');
 
 app.use((err, req, res, next) => {
     console.error(err.stack);
@@ -26,6 +28,9 @@ connection.authenticate()
         console.log(error);
         console.log('erro ao conectar');
     });
+
+app.use('/', categoriesController);
+app.use('/', articlesController);
 
     app.listen(8000, () => {
         console.log('servidor rodando');
