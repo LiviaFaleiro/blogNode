@@ -1,0 +1,60 @@
+<%- include('../../partials/header.ejs')%>
+<%- include('../../partials/navbar.ejs')%>
+<div class="container">
+    <hr>
+    <h1>Categories</h1>
+    <hr>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Slug</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <%categories.forEach(category => { %>
+                <tr>
+                    <th><%=category.id %></th>
+                    <th><%=category.title%></th>
+                    <th><%=category.slug%></th>
+                    <th>
+                        <button class="btn btn-warning">Edit</button>
+
+                        <form method="POST" action="/categories/delete" style="display: inline;" onsubmit="deleteCategory(event,this)">
+                            <input type="hidden" name="id" value="<%=category.id%>">
+                            <button class="btn btn-danger">Delete</button>
+                        </form>
+                        
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</div>
+<%- include('../../partials/footer.ejs')%>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+    function deleteCategory(event,form){
+        event.preventDefault();
+        var decision = swal({
+    title: "Are you sure?",
+    text: "Once deleted, you will not be able to recover this category!",
+    icon: "warning",
+    buttons: true,
+    dangerMode: true,
+  })
+  .then((willDelete) => {
+    if (willDelete) {
+      swal("Poof!Category has been deleted!", {
+        icon: "success",
+      });
+      form.submit();
+    } else {
+      swal("Category is safe!");
+    }
+  });
+    }
+</script>
+
