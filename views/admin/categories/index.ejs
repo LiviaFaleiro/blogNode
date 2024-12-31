@@ -1,40 +1,106 @@
-<%- include('../../partials/header.ejs')%>
 <%- include('../../partials/navbar.ejs')%>
-<div class="container">
-    <hr>
-    <h1>Categories</h1>
-    <hr>
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Title</th>
-                <th>Slug</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            <%categories.forEach(category => { %>
-                <tr>
-                    <th><%=category.id %></th>
-                    <th><%=category.title%></th>
-                    <th><%=category.slug%></th>
-                    <th>
-                        <button class="btn btn-warning">Edit</button>
+<%- include('../../partials/header.ejs')%>
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="card shadow-lg border-0 rounded-4">
+                <div class="card-header p-4" style="background: linear-gradient(45deg, #98FB98, #ff69b4);">
+                    <h2 class="text-white text-center mb-0 fw-bold">
+                        <i class="fas fa-heart me-2"></i>My Categories
+                    </h2>
+                </div>
+                
+                <div class="card-body p-4">
+                    <div class="table-responsive">
+                        <table class="table table-borderless align-middle mb-0">
+                            <thead>
+                                <tr>
+                                    <th class="px-4 py-3 text-center" style="color: #ff69b4; font-size: 1.1em;">
+                                        <i class="fas fa-hashtag me-2"></i>ID
+                                    </th>
+                                    <th class="px-4 py-3" style="color: #ff69b4; font-size: 1.1em;">
+                                        <i class="fas fa-tag me-2"></i>Title
+                                    </th>
+                                    <th class="px-4 py-3" style="color: #ff69b4; font-size: 1.1em;">
+                                        <i class="fas fa-link me-2"></i>Slug
+                                    </th>
+                                    <th class="px-4 py-3 text-center" style="color: #ff69b4; font-size: 1.1em;">
+                                        <i class="fas fa-magic me-2"></i>Actions
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% categories.forEach(category => { %>
+                                    <tr class="category-row">
+                                        <td class="px-4 text-center"><%= category.id %></td>
+                                        <td class="px-4 fw-bold" style="color: #ff69b4;"><%= category.title %></td>
+                                        <td class="px-4"><%= category.slug %></td>
+                                        <td class="px-4 text-center">
+                                            <a href="/admin/categories/edit/<%= category.id %>" 
+                                               class="btn btn-sm mx-1 text-white"
+                                               style="background-color: #98FB98;">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            <form method="POST" action="/categories/delete" style="display: inline;" onsubmit="deleteCategory(event, this)">
+                                                <input type="hidden" name="id" value="<%= category.id %>">
+                                                <button type="submit" class="btn btn-sm mx-1 text-white" style="background-color: #ff69b4;">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </form>
+                                            
+                                        </td>
+                                    </tr>
+                                <% }) %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
 
-                        <form method="POST" action="/categories/delete" style="display: inline;" onsubmit="deleteCategory(event,this)">
-                            <input type="hidden" name="id" value="<%=category.id%>">
-                            <button class="btn btn-danger">Delete</button>
-                        </form>
-                        
-                    </td>
-                </tr>
-            <% }) %>
-        </tbody>
-    </table>
+            <div class="text-center mt-4">
+                <a href="/admin/categories/new" 
+                   class="btn btn-lg px-4 py-2 text-white fw-bold"
+                   style="background: linear-gradient(45deg, #ff69b4, #98FB98); border-radius: 25px;">
+                    <i class="fas fa-plus-circle me-2"></i>Add New Category
+                </a>
+            </div>
+        </div>
+    </div>
 </div>
+
+<style>
+.category-row {
+    transition: all 0.3s ease;
+    border-radius: 15px;
+}
+
+.category-row:hover {
+    background-color: rgba(152, 251, 152, 0.1);
+    transform: translateY(-2px);
+}
+
+.btn {
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.card {
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+}
+</style>
 <%- include('../../partials/footer.ejs')%>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 <script>
     function deleteCategory(event,form){
         event.preventDefault();
