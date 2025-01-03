@@ -9,7 +9,7 @@
                     <h2 class="text-black text-center mb-0 fw-bold">Edit Category</h2>
                 </div>
                 <div class="card-body p-4">
-                    <form method="POST" action="/categories/save">
+                    <form method="POST" action="/categories/update">
                         <div class="mb-4">
                             <label for="categoryTitle" class="form-label fw-bold" style="color: #ff69b4;">Category Name</label>
                             <div class="input-group">
@@ -22,6 +22,7 @@
                                        name="title" 
                                        value="<%=categoria.title%>"
                                        style="border-color: #98FB98;">
+                                <input type="hidden" name="id" value="<%=categoria.id%>">
                             </div>
                         </div>
                         <div class="d-grid gap-2">
