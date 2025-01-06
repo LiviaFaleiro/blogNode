@@ -1,0 +1,130 @@
+<%- include('../../partials/navbar.ejs')%>
+<%- include('../../partials/header.ejs')%>
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="card shadow-lg border-0 rounded-4">
+                <div class="card-header p-4" style="background: linear-gradient(45deg, #98FB98, #ff69b4);">
+                    <h2 class="text-white text-center mb-0 fw-bold">
+                        <i class="fas fa-heart me-2"></i>Articles
+                    </h2>
+                </div>
+                
+                <div class="card-body p-4">
+                    <div class="table-responsive">
+                        <table class="table table-borderless align-middle mb-0">
+                            <thead>
+                                <tr>
+                                    <th class="px-4 py-3 text-center" style="color: #ff69b4; font-size: 1.1em;">
+                                        <i class="fas fa-hashtag me-2"></i>ID
+                                    </th>
+                                    <th class="px-4 py-3" style="color: #ff69b4; font-size: 1.1em;">
+                                        <i class="fas fa-tag me-2"></i>Title
+                                    </th>
+                                    <th class="px-4 py-3" style="color: #ff69b4; font-size: 1.1em;">
+                                        <i class="fas fa-link me-2"></i>Slug
+                                    </th>
+                                    <th class="px-4 py-3" style="color: #ff69b4; font-size: 1.1em;">
+                                        <i class="fa fa-paperclip me-2"></i>Category
+                                    </th>
+                                    <th class="px-4 py-3 text-center" style="color: #ff69b4; font-size: 1.1em;">
+                                        <i class="fas fa-magic me-2"></i>Actions
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% articles.forEach(article=>{ %>
+                                    <td class="px-4 py-3 text-center" style="color: #ff69b4; font-size: 1.1em;">
+                                       </i><%=article.id%>
+                                    </td>
+                                    <td class="px-4 py-3" style="color: #ff69b4; font-size: 1.1em;">
+                                       <%=article.title%>
+                                    </td>
+                                    <td class="px-4 py-3" style="color: #ff69b4; font-size: 1.1em;">
+                                       <%=article.slug%>
+                                    </td>
+                                    <td class="px-4 py-3" style="color: #ff69b4; font-size: 1.1em;">
+                                        <%=article.category.title%>
+                                    </td>
+                                    <td>
+                                        <form method="POST" action="/articles/delete" style="display: inline;" onsubmit="deleteArticle(event, this)">
+                                            <input type="hidden" name="id" value="<%= article.id %>">
+                                            <button type="submit" class="btn btn-sm mx-1 text-white" style="background-color: #ff69b4;">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                <%}) %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-4">
+                <a href="/admin/articles/new" 
+                   class="btn btn-lg px-4 py-2 text-white fw-bold"
+                   style="background: linear-gradient(45deg, #ff69b4, #98FB98); border-radius: 25px;">
+                    <i class="fas fa-plus-circle me-2"></i>Add New Article
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.category-row {
+    transition: all 0.3s ease;
+    border-radius: 15px;
+}
+
+.category-row:hover {
+    background-color: rgba(152, 251, 152, 0.1);
+    transform: translateY(-2px);
+}
+
+.btn {
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.card {
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+}
+</style>
+<%- include('../../partials/footer.ejs')%>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+<script>
+    function deleteArticle(event,form){
+        event.preventDefault();
+        var decision = swal({
+    title: "Are you sure?",
+    text: "Once deleted, you will not be able to recover this article!",
+    icon: "warning",
+    buttons: true,
+    dangerMode: true,
+  })
+  .then((willDelete) => {
+    if (willDelete) {
+      swal("Poof!Article has been deleted!", {
+        icon: "success",
+      });
+      form.submit();
+    } else {
+      swal("Article is safe!");
+    }
+  });
+    }
+</script>
+
