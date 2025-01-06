@@ -1,5 +1,30 @@
 <%- include('partials/header.ejs')%>
+<%- include('partials/homeNavBar.ejs')%>
 <body>
-    <h1>Home</h1>
+    <div class="container mt-4">
+        <div class="hero-section text-center p-5 mb-4" style="background: linear-gradient(135deg, #ff69b4 0%, #98ff98 100%); border-radius: 15px; color: white;">
+            <h1 class="display-4 fw-bold">Latest Articles</h1>
+            <p class="lead">Discover a little bit of everything</p>
+        </div>
+        
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            <% articles.forEach(article => { %>
+                <div class="col">
+                    <div class="card h-100 shadow-sm" style="border: none; border-radius: 12px;">
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold" style="color: #ff69b4;"><%= article.title %></h5>
+                            <a href="/article/<%= article.id %>" class="btn w-100" 
+                               style="background-color: #98ff98; color: #333; border: none; transition: all 0.3s;">
+                               Read More
+                            </a>
+                        </div>
+                        <div class="card-footer bg-transparent text-muted" style="border-top: 2px solid #f0f0f0;">
+                            <small><%= new Date(article.createdAt).toLocaleDateString() %></small>
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    </div>
 </body>
 <%- include('partials/footer.ejs')%>

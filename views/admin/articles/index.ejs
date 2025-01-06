@@ -34,8 +34,9 @@
                             </thead>
                             <tbody>
                                 <% articles.forEach(article=>{ %>
+                                    <tr class="article-row"></tr>
                                     <td class="px-4 py-3 text-center" style="color: #ff69b4; font-size: 1.1em;">
-                                       </i><%=article.id%>
+                                       <%=article.id%>
                                     </td>
                                     <td class="px-4 py-3" style="color: #ff69b4; font-size: 1.1em;">
                                        <%=article.title%>
@@ -54,6 +55,7 @@
                                             </button>
                                         </form>
                                     </td>
+                                </tr>
                                 <%}) %>
                             </tbody>
                         </table>
