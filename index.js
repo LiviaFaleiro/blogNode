@@ -14,10 +14,33 @@ app.use((err, req, res, next) => {
 });
 
 app.get('/', (req, res) => {
-    Article.findAll().then(articles =>{
+    Article.findAll({
+        order: [
+            ['id', 'DESC']
+        ]
+    }).then(articles =>{
         res.render('index', {articles: articles});
     })
 });
+
+app.get('/:slug', (req, res)=>{
+    var slug = req.params.slug;
+    Article.findOne({
+        where: {
+            slug: slug
+        }
+    
+    }).then(Article =>{
+        if(Article!=undefined){
+            res.render('article', {article: Article});
+        }
+        else{
+            res.redirect('/');
+        }
+    }).catch(err=> {
+        res.redirect('/');
+    })
+})
 
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
