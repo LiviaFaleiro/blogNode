@@ -6,9 +6,11 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
+          <% categories.forEach(category => { %>
           <li class="nav-item">
-            <a class="nav-link text-white" href="/">Home</a>
+            <a class="nav-link text-white" href="/category/<%=category.slug%>"><%=category.title%></a>
           </li>
+        <% })%>
         </ul>
       </div>
     </div>
