@@ -32,8 +32,8 @@ app.get('/:slug', (req, res)=>{
             slug: slug
         }
     
-    }).then(Article =>{
-        if(Article!=undefined){
+    }).then(article =>{
+        if(article!=undefined){
             Category.findAll().then(categories=>{
                 res.render('article', {article: article, categories: categories});
             })        }
