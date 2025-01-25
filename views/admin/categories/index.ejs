@@ -4,9 +4,9 @@
     <div class="row justify-content-center">
         <div class="col-md-10">
             <div class="card shadow-lg border-0 rounded-4">
-                <div class="card-header p-4" style="background: linear-gradient(45deg, #98FB98, #ff69b4);">
+                <div class="card-header p-4" style="background:#1a472a;">
                     <h2 class="text-white text-center mb-0 fw-bold">
-                        <i class="fas fa-heart me-2"></i>My Categories
+                        My Categories
                     </h2>
                 </div>
                 
@@ -15,16 +15,16 @@
                         <table class="table table-borderless align-middle mb-0">
                             <thead>
                                 <tr>
-                                    <th class="px-4 py-3 text-center" style="color: #ff69b4; font-size: 1.1em;">
+                                    <th class="px-4 py-3 text-center" style="color: #1a472a; font-size: 1.1em;">
                                         <i class="fas fa-hashtag me-2"></i>ID
                                     </th>
-                                    <th class="px-4 py-3" style="color: #ff69b4; font-size: 1.1em;">
+                                    <th class="px-4 py-3" style="color: #1a472a; font-size: 1.1em;">
                                         <i class="fas fa-tag me-2"></i>Title
                                     </th>
-                                    <th class="px-4 py-3" style="color: #ff69b4; font-size: 1.1em;">
+                                    <th class="px-4 py-3" style="color: #1a472a; font-size: 1.1em;">
                                         <i class="fas fa-link me-2"></i>Slug
                                     </th>
-                                    <th class="px-4 py-3 text-center" style="color: #ff69b4; font-size: 1.1em;">
+                                    <th class="px-4 py-3 text-center" style="color: #1a472a; font-size: 1.1em;">
                                         <i class="fas fa-magic me-2"></i>Actions
                                     </th>
                                 </tr>
@@ -33,17 +33,17 @@
                                 <% categories.forEach(category => { %>
                                     <tr class="category-row">
                                         <td class="px-4 text-center"><%= category.id %></td>
-                                        <td class="px-4 fw-bold" style="color: #ff69b4;"><%= category.title %></td>
+                                        <td class="px-4 fw-bold" style="color: #1a472a;"><%= category.title %></td>
                                         <td class="px-4"><%= category.slug %></td>
                                         <td class="px-4 text-center">
                                             <a href="/admin/categories/edit/<%= category.id %>" 
                                                class="btn btn-sm mx-1 text-white"
-                                               style="background-color: #98FB98;">
+                                               style="background-color: #1a472a;">
                                                 <i class="fas fa-edit"></i>
                                             </a>
                                             <form method="POST" action="/categories/delete" style="display: inline;" onsubmit="deleteCategory(event, this)">
                                                 <input type="hidden" name="id" value="<%= category.id %>">
-                                                <button type="submit" class="btn btn-sm mx-1 text-white" style="background-color: #ff69b4;">
+                                                <button type="submit" class="btn btn-sm mx-1 text-white" style="background-color: #760000;">
                                                     <i class="fas fa-trash"></i>
                                                 </button>
                                             </form>
@@ -60,7 +60,7 @@
             <div class="text-center mt-4">
                 <a href="/admin/categories/new" 
                    class="btn btn-lg px-4 py-2 text-white fw-bold"
-                   style="background: linear-gradient(45deg, #ff69b4, #98FB98); border-radius: 25px;">
+                   style="background:#1a472a; border-radius: 25px;">
                     <i class="fas fa-plus-circle me-2"></i>Add New Category
                 </a>
             </div>

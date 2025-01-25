@@ -1,18 +1,43 @@
-<nav class="navbar navbar-expand-lg" style="background-color: #ff69b4;">
-    <div class="container-fluid">
-      <a class="navbar-brand text-white" href="/">BlogNode</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <% categories.forEach(category => { %>
-          <li class="nav-item">
-            <a class="nav-link text-white" href="/category/<%=category.slug%>"><%=category.title%></a>
-          </li>
-        <% })%>
-        </ul>
-      </div>
+<style>
+  .nav-link {
+      position: relative;
+      transition: color 0.3s ease;
+  }
+
+  .nav-link::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: white;
+      transition: width 0.3s ease;
+  }
+
+  .nav-link:hover::after {
+      width: 100%;
+  }
+
+  .navbar-nav .nav-link:active {
+      transform: scale(0.95);
+  }
+</style>
+
+<nav class="navbar navbar-expand-lg" style="background: linear-gradient(to right, #1a472a, #2e5a3f);">
+  <div class="container-fluid">
+    <a class="navbar-brand text-white" href="/" style="font-family: 'Playfair Display', serif; font-size: 1.5rem;">BlogNode</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <% categories.forEach(category => { %>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="/category/<%=category.slug%>"><%=category.title%></a>
+        </li>
+      <% })%>
+      </ul>
     </div>
-  </nav>
-  
+  </div>
+</nav>

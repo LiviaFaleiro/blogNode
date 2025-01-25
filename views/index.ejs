@@ -1,25 +1,72 @@
 <%- include('partials/header.ejs')%>
 <%- include('partials/homeNavBar.ejs')%>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;500&display=swap');
+
+    body {
+        font-family: 'Montserrat', sans-serif;
+        background-color: #fafafa;
+    }
+
+    .hero-section h1 {
+        font-family: 'Playfair Display', serif;
+    }
+
+    .card-title {
+        font-family: 'Playfair Display', serif;
+    }
+</style>
 <body>
     <div class="container mt-4">
-        <div class="hero-section text-center p-5 mb-4" style="background: linear-gradient(135deg, #ff69b4 0%, #98ff98 100%); border-radius: 15px; color: white;">
-            <h1 class="display-4 fw-bold">Latest Articles</h1>
-            <p class="lead">Discover a little bit of everything</p>
+        <div class="hero-section text-center p-5 mb-4" 
+             style="background: linear-gradient(135deg, #1a472a 0%, #2e5a3f 100%); 
+                    border-radius: 15px; 
+                    color: white;
+                    transform: translateY(0);
+                    transition: transform 0.3s ease;
+                    box-shadow: 0 10px 30px rgba(0,0,0,0.1);"
+             onmouseover="this.style.transform='translateY(-5px)'"
+             onmouseout="this.style.transform='translateY(0)'">
+            <h1 class="display-4 fw-bold">Curated Articles</h1>
+            <p class="lead">Timeless perspectives for the discerning reader</p>
         </div>
         
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-            <% articles.forEach(article => { %> <!--for each de artigos "renderiza artigos"-->
+            <% articles.forEach(article => { %>
                 <div class="col">
-                    <div class="card h-100 shadow-sm" style="border: none; border-radius: 12px;">
+                    <div class="card h-100" 
+                         style="border: none; 
+                                border-radius: 12px;
+                                transition: all 0.3s ease;
+                                background-color: white;
+                                box-shadow: 0 5px 15px rgba(0,0,0,0.05);"
+                         onmouseover="this.style.transform='translateY(-10px)';this.style.boxShadow='0 15px 30px rgba(0,0,0,0.1)'"
+                         onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 5px 15px rgba(0,0,0,0.05)'">
                         <div class="card-body">
-                            <h5 class="card-title fw-bold" style="color: #ff69b4;"><%= article.title %></h5>
-                            <a href="/<%= article.slug %>" class="btn w-100" 
-                               style="background-color: #98ff98; color: #333; border: none; transition: all 0.3s;">
-                               Read More
+                            <h5 class="card-title fw-bold" style="color: #1a472a;">
+                                <%= article.title %>
+                            </h5>
+                            <a href="/<%= article.slug %>" 
+                               class="btn w-100" 
+                               style="background-color: #2e5a3f; 
+                                      color: white; 
+                                      border: none; 
+                                      transition: all 0.3s;
+                                      text-transform: uppercase;
+                                      letter-spacing: 1px;
+                                      font-size: 0.9rem;">
+                               Read Article
                             </a>
                         </div>
-                        <div class="card-footer bg-transparent text-muted" style="border-top: 2px solid #f0f0f0;">
-                            <small><%= new Date(article.createdAt).toLocaleDateString() %></small>
+                        <div class="card-footer bg-transparent" 
+                             style="border-top: 1px solid rgba(26, 71, 42, 0.1);">
+                            <small style="color: #5f7a6e;">
+                                <%= new Date(article.createdAt).toLocaleDateString('en-US', { 
+                                    year: 'numeric', 
+                                    month: 'long', 
+                                    day: 'numeric' 
+                                }) %>
+                            </small>
                         </div>
                     </div>
                 </div>
